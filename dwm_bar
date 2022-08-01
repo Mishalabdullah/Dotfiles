@@ -1,0 +1,5 @@
+
+feh --bg-fill /home/mishal/Pictures/Background/Firefox_wallpaper.png 
+while true; do
+	xsetroot -name "$(clock)","$(battery)"
+done &
