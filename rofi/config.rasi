@@ -1,0 +1,3 @@
+//width=600
+/* Dark theme. */
+@import "~/.cache/wal/colors-rofi-dark"
