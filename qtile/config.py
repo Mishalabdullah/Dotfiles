@@ -54,28 +54,30 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "shift"], "x", lazy.spawn("slock"), desc="Grow window up"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple st"st"s
 
 
+
     # Custom Volume And Brightness
 
     # XF86 Audio Lower Volume
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master 5%-")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume 0 -10%")),
     # XF86 Audio Raise Volume
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master 5%+")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +10%")),
     # XF86 Audio Mute
-    Key([], "XF86AudioMute", lazy.spawn("amixer -q sset Master toggle")),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute 0 toggle")),
 
  # Increase brightness
-    Key([], "XF86MonBrightnessUp", lazy.spawn("light -A 10")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("sudo brightnessctl set +10%")),
     # Decrease brightness
-    Key([], "XF86MonBrightnessDown", lazy.spawn("light -U 10")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("sudo brightnessctl set 10%-")),
     
     # Browser and File manager
-    Key(["mod1"], "s", lazy.spawn("brave-browser")),
+    Key(["mod1"], "s", lazy.spawn("firefox")),
      Key(["mod1"], "f", lazy.spawn("kitty --class=ranger -e ranger")),
 
 
@@ -132,13 +134,16 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=[colors[0], colors[1]], border_width=2),
+    layout.Columns(border_focus_stack=[colors[0], colors[1]], border_width=2,margin=7,border_focus=colors[1],border_normal="#000000"),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
+     #layout.MonadTall( margin=10,  # This sets the gap between windows and the screen edges
+     #   border_width=2,  # This sets the border width of windows
+     #   border_focus=colors[1],  # Border color of the focused window
+     #   border_normal="#000000"),
     # layout.MonadWide(),
     # layout.RatioTile(),
     #layout.Tile(),
