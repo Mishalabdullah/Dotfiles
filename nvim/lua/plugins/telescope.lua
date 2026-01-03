@@ -1,15 +1,11 @@
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>ps", function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end)
-
--- For Viewing Diagonstics
-vim.api.nvim_set_keymap(
-  'n',
-  '<leader>fd',
-  '<cmd>lua require("telescope.builtin").diagnostics()<CR>',
-  { noremap = true, silent = true }
-)
--- Buffer switching with telescope
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+return {
+	"nvim-telescope/telescope.nvim",
+	tag = "v0.2.0",
+	dependencies = { "nvim-lua/plenary.nvim" },
+	config = function()
+		local builtin = require("telescope.builtin")
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+		vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+		vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal left<CR>", {})
+	end,
+}
